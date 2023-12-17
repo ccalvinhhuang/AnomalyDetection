@@ -6,9 +6,6 @@ from torch.utils.data import DataLoader, TensorDataset
 
 normal_data = torch.randn(100, 10)  # 100 samples of normal data
 fraudulent_data = torch.randn(20, 10)  # 20 samples of potentially fraudulent data
-
-
-
 class Autoencoder(nn.Module):
     def __init__(self, input_dim, encoding_dim):
         super(Autoencoder, self).__init__()
@@ -59,7 +56,6 @@ for data in normal_dataloader:
     inputs = data[0]
     outputs = model(inputs)
     loss = criterion(outputs, inputs)
-    print(loss.item() > 0.9)
     if loss.item() > 0.9:  # Set an appropriate threshold
         anomalies.append(inputs)
 
@@ -67,7 +63,6 @@ for data in fraudulent_dataloader:
     inputs = data[0]
     outputs = model(inputs)
     loss = criterion(outputs, inputs)
-    print(loss.item() > 0.9)
     if loss.item() > 0.9:
         anomalies.append(inputs)
 
